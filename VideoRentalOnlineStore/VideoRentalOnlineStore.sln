@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRentalOnlineStore", "VideoRentalOnlineStore\VideoRentalOnlineStore.csproj", "{5D7CDD65-595C-4108-8F3D-DBBDF3A1EBEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRentalOnlineStore", "VideoRentalOnlineStore\VideoRentalOnlineStore.csproj", "{5D7CDD65-595C-4108-8F3D-DBBDF3A1EBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{6363F0B5-E00E-493C-9A79-72CF14841654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{6363F0B5-E00E-493C-9A79-72CF14841654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModels", "DomainModels\DomainModels.csproj", "{0CE4DACC-4716-43F8-910C-269436F01182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModels", "DomainModels\DomainModels.csproj", "{0CE4DACC-4716-43F8-910C-269436F01182}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{70CF2ABE-3758-43EF-91BE-B30CA2980908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{70CF2ABE-3758-43EF-91BE-B30CA2980908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{DD76F656-7B41-4A8F-A78A-B166F1D2EE53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{DD76F656-7B41-4A8F-A78A-B166F1D2EE53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mappers", "Mappers\Mappers.csproj", "{B9222C87-880A-40CD-8989-F4E47767F3D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DD76F656-7B41-4A8F-A78A-B166F1D2EE53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD76F656-7B41-4A8F-A78A-B166F1D2EE53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD76F656-7B41-4A8F-A78A-B166F1D2EE53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9222C87-880A-40CD-8989-F4E47767F3D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9222C87-880A-40CD-8989-F4E47767F3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9222C87-880A-40CD-8989-F4E47767F3D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9222C87-880A-40CD-8989-F4E47767F3D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

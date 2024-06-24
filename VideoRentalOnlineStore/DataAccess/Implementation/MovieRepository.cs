@@ -1,38 +1,22 @@
 ﻿using DataAccess.Interfaces;
 using DomainModels;
+using DomainModels.Enums;
 
 namespace DataAccess.Implementation
 {
-    public class MovieRepository : IRepository<Movie>
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        public List<Movie> GetAll()
+        public List<Movie> SearchByTitle(string title)
         {
-            return new List<Movie> { StaticDb.Movies };
+            var movies = ReadContent();
+            return movies.Where(x => x.Title.Contains(title, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
-        public Movie GetById(int id)
+        public List<Movie> SearchByGenre(Genre genre)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Save(Movie entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Movie entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Movie entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
+            var moviesByGenre = ReadContent();
+            //return moviesByGenre.Where(x => x.Genre.Equals(genre)).ToList();
+            return moviesByGenre.Where(x => x.Genre == genre).ToList();
         }
     }
 }

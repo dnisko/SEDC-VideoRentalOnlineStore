@@ -2,6 +2,13 @@
 {
     public enum Part
     {
+        Actor = 1,
+        Director,
+        Camera,
+        Sound,
+        Visuals,
+        Other
+        /*
         PartI = 1,
         PartII,
         PartIII,
@@ -32,5 +39,6 @@
         PartXXVIII,
         PartXXIX,
         PartXXX
+        */
     }
 }

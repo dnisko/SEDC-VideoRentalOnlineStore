@@ -3,36 +3,18 @@ using DomainModels;
 
 namespace DataAccess.Implementation
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : Repository<User>, IUserRepository
     {
-        public List<User> GetAll()
+        public List<User> SearchByName(string name)
         {
-            return new List<User> { StaticDb.Users };
+            var names = ReadContent();
+            return names.Where(x => x.FullName.Contains(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
-        public User GetById(int id)
+        public List<User> SearchByUserName(string userName)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Save(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
+            var users = ReadContent();
+            return users.Where(x => x.UserName.Contains(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();  
         }
     }
 }

@@ -1,0 +1,61 @@
+﻿
+@model List<ViewModels.UserViewModel>
+
+@{
+    var filterModel = new FilterViewModel();
+}
+
+@* <div class="col-4">
+    <form asp-action="SearchByName" method="post" class="input-group">
+        <input asp-for="@filterModel.Name" class="form-control col-6" placeholder="Пребарај..." />
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+</div> *@
+@* <div>
+    <a asp-action="Create" class="btn btn-primary">Create new pizza</a>
+</div> *@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">FullName</th>
+        <th scope="col">UserName</th>
+        <th scope="col">CardNumber</th>
+        <th scope="col">Email</th>
+        <th scope="col">CreatedOn</th>
+        <th scope="col">IsSubscriptionExpired</th>
+        <th scope="col">SubscriptionType</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var pizza in Model)
+    {
+        <tr>
+            <th scope="row">@pizza.Id</th>
+            <td>@pizza.FullName</td>
+            <td>@pizza.UserName</td>
+            <td>@pizza.CardNumber</td>
+            <td>@pizza.Email</td>
+            <td>@pizza.CreatedOn</td>
+            <td>@pizza.IsSubscriptionExpired</td>
+            <td>@pizza.SubscriptionType</td>
+            @* <td>
+                <a asp-action="Details" asp-controller="Pizza" asp-route-id="@pizza.Id" class="btn btn-primary">Details</a>
+                <a asp-action="Edit" asp-controller="Pizza" asp-route-id="@pizza.Id" class="btn btn-info">Edit</a>
+                <a asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" class="btn btn-danger">Remove</a>
+            </td> *@
+        </tr>
+    }
+    </tbody>
+</table>
+
+@* Id = user.Id,
+FullName = user.FullName,
+Age = user.Age,
+UserName = user.UserName,
+Password = user.Password,
+CardNumber = user.CardNumber,
+Email = user.Email,
+CreatedOn = user.CreatedOn,
+IsSubscriptionExpired = user.IsSubscriptionExpired,
+SubscriptionType = user.SubscriptionType *@
