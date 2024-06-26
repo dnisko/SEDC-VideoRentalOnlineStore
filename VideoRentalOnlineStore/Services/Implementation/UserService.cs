@@ -1,8 +1,9 @@
-﻿using DataAccess.Implementation;
+﻿using System.Security.Cryptography.X509Certificates;
+using DataAccess.Implementation;
 using DomainModels;
+using DomainModels.Enums;
 using Mappers;
 using Services.Interfaces;
-using System.Xml.Linq;
 using ViewModels;
 
 namespace Services.Implementation
@@ -36,10 +37,10 @@ namespace Services.Implementation
             }
 
             //if it is new user
-            if (_userRepository.GetAll().Any(x => x.UserName.ToLower() == userModel.UserName.ToLower()))
-            {
-                throw new Exception("Username is taken.");
-            }
+            //if (_userRepository.GetAll().Any(x => x.UserName.ToLower() == userModel.UserName.ToLower()))
+            //{
+            //    throw new Exception("Username is taken.");
+            //}
 
             var user = new User()
             {
@@ -85,6 +86,44 @@ namespace Services.Implementation
         {
             var users = _userRepository.SearchByUserName(userName);
             return users.Select(x => x.ToModel()).ToList();
+        }
+
+        public UserViewModel GetCardNumber(string cardNumber)
+        {
+            var user = _userRepository.GetCardNumber(cardNumber);
+            return user.ToModel();
+        }
+
+        public UserViewModel GetEmail(string email)
+        {
+            var user = _userRepository.GetEmail(email);
+            return user.ToModel();
+        }
+
+        public void RegisterUser(UserViewModel newUser)
+        {
+            if (_userRepository.GetAll().Any(x => x.UserName.ToLower() == newUser.UserName.ToLower()
+                                                  || x.Email == newUser.Email
+                                                  || x.CardNumber == newUser.CardNumber))
+            {
+                throw new Exception("The username, email or CardNumber is taken.");
+            }
+
+            var user = new User
+            {
+                Id = newUser.Id,
+                FullName = newUser.FullName,
+                Age = newUser.Age,
+                UserName = newUser.UserName,
+                Password = newUser.Password,
+                CardNumber = newUser.CardNumber,
+                Email = newUser.Email,
+                CreatedOn = DateTime.UtcNow,
+                IsSubscriptionExpired = true,
+                SubscriptionType = SubscriptionType.None
+            };
+
+            _userRepository.Save(user);
         }
     }
 }

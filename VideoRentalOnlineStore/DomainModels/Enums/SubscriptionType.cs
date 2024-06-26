@@ -2,7 +2,8 @@
 {
     public enum SubscriptionType
     {
-        Monthly = 1,
+        None = 1,
+        Monthly,
         Yearly
     }
 }

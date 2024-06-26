@@ -7,5 +7,6 @@ namespace DataAccess.Interfaces
     {
         List<Movie> SearchByTitle(string title);
         List<Movie> SearchByGenre(Genre genre);
+        List<Movie> GetAvailableMovies();
     }
 }

@@ -18,5 +18,11 @@ namespace DataAccess.Implementation
             //return moviesByGenre.Where(x => x.Genre.Equals(genre)).ToList();
             return moviesByGenre.Where(x => x.Genre == genre).ToList();
         }
+
+        public List<Movie> GetAvailableMovies()
+        {
+            var availableMovies = ReadContent();
+            return availableMovies.Where(x => x.IsAvailable).ToList();
+        }
     }
 }

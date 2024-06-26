@@ -16,5 +16,17 @@ namespace DataAccess.Implementation
             var users = ReadContent();
             return users.Where(x => x.UserName.Contains(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();  
         }
+
+        public User GetCardNumber(string cardNumber)
+        {
+            var user = ReadContent();
+            return user.FirstOrDefault(x => x.CardNumber == cardNumber);
+        }
+
+        public User GetEmail(string email)
+        {
+            var user = ReadContent();
+            return user.FirstOrDefault(x => x.Email == email);
+        }
     }
 }
