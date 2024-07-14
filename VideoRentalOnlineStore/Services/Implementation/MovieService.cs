@@ -10,6 +10,12 @@ namespace Services.Implementation
     public class MovieService : IMovieService
     {
         private MovieRepository _movieRepository;
+
+        public MovieService()
+        {
+            _movieRepository = new MovieRepository();
+        }
+
         public List<MovieViewModel> GetMovies()
         {
             var movies = _movieRepository.GetAll();

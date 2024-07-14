@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using DataAccess.Implementation;
+﻿using DataAccess.Implementation;
 using DomainModels;
 using DomainModels.Enums;
 using Mappers;
@@ -44,8 +43,6 @@ namespace Services.Implementation
 
             var user = new User()
             {
-                //can we use the mapper here!?
-                //userModel.ToModel();
                 Id = userModel.Id,
                 FullName = userModel.FullName,
                 Age = userModel.Age,

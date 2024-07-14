@@ -3,30 +3,38 @@ using DomainModels;
 
 namespace DataAccess.Implementation
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    internal class UserRepository : Repository<User>, IUserRepository
     {
+        public UserRepository(MovieRentalAppDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public List<User> SearchByName(string name)
         {
-            var names = ReadContent();
-            return names.Where(x => x.FullName.Contains(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            var items = _dbContext.Users
+                .Where(x => x.FullName.Contains(name))
+                .ToList();
+            return items;
         }
 
         public List<User> SearchByUserName(string userName)
         {
-            var users = ReadContent();
-            return users.Where(x => x.UserName.Contains(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();  
+            var items = _dbContext.Users
+                .Where(x => x.UserName.Contains(userName))
+                .ToList();
+            return items;
         }
 
         public User GetCardNumber(string cardNumber)
         {
-            var user = ReadContent();
-            return user.FirstOrDefault(x => x.CardNumber == cardNumber);
+            var cardNo = _dbContext.Users.FirstOrDefault(x => x.CardNumber == cardNumber);
+            return cardNo;
         }
 
         public User GetEmail(string email)
         {
-            var user = ReadContent();
-            return user.FirstOrDefault(x => x.Email == email);
+            var item = _dbContext.Users.FirstOrDefault(x => x.Email == email);
+            return item;
         }
     }
 }

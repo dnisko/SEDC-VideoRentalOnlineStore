@@ -1,0 +1,112 @@
+[
+  {
+    "Id": 1,
+    "Title": "The Shawshank Redemption",
+    "Genre": "Drama",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "1994-09-22T00:00:00",
+    "Length": "02:22:00",
+    "AgeRestriction": 15,
+    "Quantity": 10
+  },
+  {
+    "Id": 2,
+    "Title": "The Godfather",
+    "Genre": "Drama",
+    "Language": "English",
+    "IsAvailable": false,
+    "ReleaseDate": "1972-03-24T00:00:00",
+    "Length": "02:55:00",
+    "AgeRestriction": 18,
+    "Quantity": 5
+  },
+  {
+    "Id": 3,
+    "Title": "The Dark Knight",
+    "Genre": "Action",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "2008-07-18T00:00:00",
+    "Length": "02:32:00",
+    "AgeRestriction": 13,
+    "Quantity": 8
+  },
+  {
+    "Id": 4,
+    "Title": "Schindler's List",
+    "Genre": "Drama",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "1993-12-15T00:00:00",
+    "Length": "03:15:00",
+    "AgeRestriction": 16,
+    "Quantity": 7
+  },
+  {
+    "Id": 5,
+    "Title": "Pulp Fiction",
+    "Genre": "Thriller",
+    "Language": "English",
+    "IsAvailable": false,
+    "ReleaseDate": "1994-10-14T00:00:00",
+    "Length": "02:34:00",
+    "AgeRestriction": 18,
+    "Quantity": 6
+  },
+  {
+    "Id": 6,
+    "Title": "The Lord of the Rings: The Return of the King",
+    "Genre": "Fantasy",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "2003-12-17T00:00:00",
+    "Length": "03:21:00",
+    "AgeRestriction": 12,
+    "Quantity": 9
+  },
+  {
+    "Id": 7,
+    "Title": "Forrest Gump",
+    "Genre": "Comedy",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "1994-07-06T00:00:00",
+    "Length": "02:22:00",
+    "AgeRestriction": 13,
+    "Quantity": 11
+  },
+  {
+    "Id": 8,
+    "Title": "Inception",
+    "Genre": "ScienceFiction",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "2010-07-16T00:00:00",
+    "Length": "02:28:00",
+    "AgeRestriction": 13,
+    "Quantity": 10
+  },
+  {
+    "Id": 9,
+    "Title": "Fight Club",
+    "Genre": "Drama",
+    "Language": "English",
+    "IsAvailable": false,
+    "ReleaseDate": "1999-10-15T00:00:00",
+    "Length": "02:19:00",
+    "AgeRestriction": 18,
+    "Quantity": 5
+  },
+  {
+    "Id": 10,
+    "Title": "The Matrix",
+    "Genre": "ScienceFiction",
+    "Language": "English",
+    "IsAvailable": true,
+    "ReleaseDate": "1999-03-31T00:00:00",
+    "Length": "02:16:00",
+    "AgeRestriction": 16,
+    "Quantity": 8
+  }
+]

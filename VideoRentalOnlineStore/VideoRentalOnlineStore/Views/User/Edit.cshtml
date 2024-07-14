@@ -1,0 +1,34 @@
+﻿@model UserViewModel
+
+<form asp-action="Edit" asp-controller="User" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="FullName" class="form-label"></label>
+    <input asp-for="FullName" class="form-control" />
+    <span asp-validation-for="FullName" class="text-danger"></span>
+    <br />
+
+    <label asp-for="Age" class="form-label"></label>
+    <input asp-for="Age" class="form-control" />
+    <span asp-validation-for="Age" class="text-danger"></span>
+    <br />
+
+    <input type="hidden" asp-for="UserName" />
+
+    <input type="hidden" asp-for="Password" />
+
+    <input type="hidden" asp-for="CardNumber" />
+
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+
+    <input type="hidden" asp-for="CreatedOn" />
+
+    <input type="hidden" asp-for="IsSubscriptionExpired" />
+
+    <input type="hidden" asp-for="SubscriptionType" />
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>

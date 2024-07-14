@@ -1,0 +1,31 @@
+{
+  "$type": "System.Collections.Generic.List`1[[DomainModels.User, DomainModels]], System.Private.CoreLib",
+  "$values": [
+    {
+      "$type": "DomainModels.User, DomainModels",
+      "FullName": "John Doe",
+      "Age": 15,
+      "UserName": "johndoe",
+      "Password": "password123",
+      "CardNumber": "1234567890",
+      "Email": "johndoe@example.com",
+      "CreatedOn": "2023-07-14T00:00:00",
+      "IsSubscriptionExpired": false,
+      "SubscriptionType": 2,
+      "Id": 1
+    },
+    {
+      "$type": "DomainModels.User, DomainModels",
+      "FullName": "Jane Smith",
+      "Age": 35,
+      "UserName": "janesmith",
+      "Password": "securepassword",
+      "CardNumber": "2345678901",
+      "Email": "janesmith@example.com",
+      "CreatedOn": "2023-06-01T00:00:00",
+      "IsSubscriptionExpired": true,
+      "SubscriptionType": 3,
+      "Id": 2
+    }
+  ]
+}

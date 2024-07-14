@@ -1,16 +1,15 @@
-﻿
-@model List<ViewModels.UserViewModel>
+﻿@model List<ViewModels.UserViewModel>
 
 @{
     var filterModel = new FilterViewModel();
 }
 
-@* <div class="col-4">
+<div class="col-4">
     <form asp-action="SearchByName" method="post" class="input-group">
         <input asp-for="@filterModel.Name" class="form-control col-6" placeholder="Пребарај..." />
         <button type="submit" class="btn btn-info">Search</button>
     </form>
-</div> *@
+</div>
 @* <div>
     <a asp-action="Create" class="btn btn-primary">Create new pizza</a>
 </div> *@
@@ -25,25 +24,26 @@
         <th scope="col">CreatedOn</th>
         <th scope="col">IsSubscriptionExpired</th>
         <th scope="col">SubscriptionType</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var pizza in Model)
+    @foreach (var user in Model)
     {
         <tr>
-            <th scope="row">@pizza.Id</th>
-            <td>@pizza.FullName</td>
-            <td>@pizza.UserName</td>
-            <td>@pizza.CardNumber</td>
-            <td>@pizza.Email</td>
-            <td>@pizza.CreatedOn</td>
-            <td>@pizza.IsSubscriptionExpired</td>
-            <td>@pizza.SubscriptionType</td>
-            @* <td>
-                <a asp-action="Details" asp-controller="Pizza" asp-route-id="@pizza.Id" class="btn btn-primary">Details</a>
-                <a asp-action="Edit" asp-controller="Pizza" asp-route-id="@pizza.Id" class="btn btn-info">Edit</a>
-                <a asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" class="btn btn-danger">Remove</a>
-            </td> *@
+            <th scope="row">@user.Id</th>
+            <td>@user.FullName</td>
+            <td>@user.UserName</td>
+            <td>@user.CardNumber</td>
+            <td>@user.Email</td>
+            <td>@user.CreatedOn</td>
+            <td>@user.IsSubscriptionExpired</td>
+            <td>@user.SubscriptionType</td>
+            <td>
+                <a asp-action="Details" asp-controller="User" asp-route-id="@user.Id" class="btn btn-primary">Details</a>
+                <a asp-action="Edit" asp-controller="User" asp-route-id="@user.Id" class="btn btn-info">Edit</a>
+                <a asp-action="Delete" asp-controller="User" asp-route-id="@user.Id" class="btn btn-danger">Remove</a>
+            </td>
         </tr>
     }
     </tbody>
