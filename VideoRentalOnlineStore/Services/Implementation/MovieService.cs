@@ -1,4 +1,5 @@
 ﻿using DataAccess.Implementation;
+using DataAccess.Interfaces;
 using DomainModels;
 using DomainModels.Enums;
 using Mappers;
@@ -9,11 +10,11 @@ namespace Services.Implementation
 {
     public class MovieService : IMovieService
     {
-        private MovieRepository _movieRepository;
+        private IMovieRepository _movieRepository;
 
-        public MovieService()
+        public MovieService(IMovieRepository movieRepository)
         {
-            _movieRepository = new MovieRepository();
+            _movieRepository = movieRepository;
         }
 
         public List<MovieViewModel> GetMovies()

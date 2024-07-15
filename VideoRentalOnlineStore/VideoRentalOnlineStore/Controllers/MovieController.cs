@@ -9,9 +9,9 @@ namespace VideoRentalOnlineStore.Controllers
     {
         private IMovieService _movieService;
 
-        public MovieController()
+        public MovieController(IMovieService movieService)
         {
-            _movieService = new MovieService();
+            _movieService = movieService;
         }
         public IActionResult Index()
         {

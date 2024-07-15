@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace DataAccess.Implementation
 {
-    internal class MovieRepository : Repository<Movie>, IMovieRepository
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         public MovieRepository(MovieRentalAppDbContext dbContext) : base(dbContext)
         {

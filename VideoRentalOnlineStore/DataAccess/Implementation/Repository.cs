@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Implementation
 {
-    internal class Repository<T> : IRepository<T> where T : BaseClass
+    public class Repository<T> : IRepository<T> where T : BaseClass
     {
         protected MovieRentalAppDbContext _dbContext;
 

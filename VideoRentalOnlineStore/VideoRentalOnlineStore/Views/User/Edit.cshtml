@@ -13,22 +13,22 @@
     <span asp-validation-for="Age" class="text-danger"></span>
     <br />
 
-    <input type="hidden" asp-for="UserName" />
+    @* <input type="hidden" asp-for="UserName" />
 
     <input type="hidden" asp-for="Password" />
 
-    <input type="hidden" asp-for="CardNumber" />
+    <input type="hidden" asp-for="CardNumber" /> *@
 
     <label asp-for="Email" class="form-label"></label>
     <input asp-for="Email" class="form-control" />
     <span asp-validation-for="Email" class="text-danger"></span>
     <br />
 
-    <input type="hidden" asp-for="CreatedOn" />
+    @* <input type="hidden" asp-for="CreatedOn" />
 
     <input type="hidden" asp-for="IsSubscriptionExpired" />
 
-    <input type="hidden" asp-for="SubscriptionType" />
+    <input type="hidden" asp-for="SubscriptionType" /> *@
 
     <button type="submit" class="btn btn-success">Save</button>
 </form>

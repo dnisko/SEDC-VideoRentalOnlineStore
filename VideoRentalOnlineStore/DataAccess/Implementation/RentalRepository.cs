@@ -1,10 +1,9 @@
 ﻿using DataAccess.Interfaces;
 using DomainModels;
-using DomainModels.Enums;
 
 namespace DataAccess.Implementation
 {
-    internal class RentalRepository : Repository<Rental>, IRentalRepository
+    public class RentalRepository : Repository<Rental>, IRentalRepository
     {
         public RentalRepository(MovieRentalAppDbContext dbContext) : base(dbContext)
         {
@@ -19,7 +18,7 @@ namespace DataAccess.Implementation
         public Rental GetActiveRental(int userId, int movieId)
         {
             var items = _dbContext.Rentals.ToList();
-            return items.FirstOrDefault(x => x.MovieId == movieId && x.UserId = userId);
+            return items.FirstOrDefault(x => x.MovieId == movieId && x.UserId == userId);
         }
     }
 }

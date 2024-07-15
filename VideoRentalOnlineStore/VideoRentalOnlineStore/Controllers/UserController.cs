@@ -9,9 +9,9 @@ namespace VideoRentalOnlineStore.Controllers
     {
         private IUserService _userService;
 
-        public UserController()
+        public UserController(IUserService userService)
         {
-            _userService = new UserService();
+            _userService = userService;
         }
         public IActionResult Index()
         {

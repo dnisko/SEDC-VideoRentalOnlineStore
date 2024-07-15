@@ -1,4 +1,5 @@
 ﻿using DataAccess.Implementation;
+using DataAccess.Interfaces;
 using DomainModels;
 using Mappers;
 using Services.Interfaces;
@@ -8,15 +9,15 @@ namespace Services.Implementation
 {
     public class RentalService : IRentalService
     {
-        private MovieRepository _movieRepository;
-        private UserRepository _userRepository;
-        private RentalRepository _rentalRepository;
+        private IMovieRepository _movieRepository;
+        private IUserRepository _userRepository;
+        private IRentalRepository _rentalRepository;
 
-        public RentalService()
+        public RentalService(IMovieRepository movieRepository, IUserRepository userRepository, IRentalRepository rentalRepository)
         {
-            _movieRepository = new MovieRepository();
-            _userRepository = new UserRepository();
-            _rentalRepository = new RentalRepository();
+            _movieRepository = movieRepository;
+            _userRepository = userRepository;
+            _rentalRepository = rentalRepository;
         }
 
         public List<RentalViewModel> GetAllRentedMovies()

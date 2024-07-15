@@ -3,7 +3,7 @@ using DomainModels;
 
 namespace DataAccess.Implementation
 {
-    internal class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(MovieRentalAppDbContext dbContext) : base(dbContext)
         {

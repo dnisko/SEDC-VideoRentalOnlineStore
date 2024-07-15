@@ -1,4 +1,5 @@
 ﻿using DataAccess.Implementation;
+using DataAccess.Interfaces;
 using DomainModels;
 using DomainModels.Enums;
 using Mappers;
@@ -9,11 +10,11 @@ namespace Services.Implementation
 {
     public class UserService : IUserService
     {
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
 
-        public UserService()
+        public UserService(IUserRepository userRepository)
         {
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
         }
         public List<UserViewModel> GetAll()
         {

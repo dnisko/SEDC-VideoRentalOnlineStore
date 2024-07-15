@@ -1,3 +1,10 @@
+using DataAccess;
+using DataAccess.Implementation;
+using DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Services.Implementation;
+using Services.Interfaces;
+
 namespace VideoRentalOnlineStore
 {
     public class Program
@@ -7,8 +14,20 @@ namespace VideoRentalOnlineStore
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<MovieRentalAppDbContext>(option => option.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnectionString")
+            ));
+            
+
+            builder.Services.AddTransient<IMovieRepository, MovieRepository>();
+            builder.Services.AddTransient<IMovieService, MovieService>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IRentalRepository, RentalRepository>();
+            builder.Services.AddTransient<IRentalService, RentalService>();
+            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             var app = builder.Build();
 
