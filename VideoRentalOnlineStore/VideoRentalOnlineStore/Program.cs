@@ -1,6 +1,7 @@
 using DataAccess;
 using DataAccess.Implementation;
 using DataAccess.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services.Implementation;
 using Services.Interfaces;
@@ -14,12 +15,15 @@ namespace VideoRentalOnlineStore
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string 'DefaultConnectionString' not found.");
+            builder.Services.AddDbContext<MovieRentalAppDbContext>(options =>
+                options.UseSqlServer(connectionString));
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<MovieRentalAppDbContext>();
             builder.Services.AddControllersWithViews();
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<MovieRentalAppDbContext>(option => option.UseSqlServer(
-                builder.Configuration.GetConnectionString("DefaultConnectionString")
-            ));
-            
 
             builder.Services.AddTransient<IMovieRepository, MovieRepository>();
             builder.Services.AddTransient<IMovieService, MovieService>();
@@ -43,13 +47,15 @@ namespace VideoRentalOnlineStore
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();;
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            
+            app.MapRazorPages();
             app.Run();
         }
     }
