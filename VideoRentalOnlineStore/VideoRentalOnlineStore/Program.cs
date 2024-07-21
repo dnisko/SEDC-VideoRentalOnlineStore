@@ -1,6 +1,7 @@
 using DataAccess;
 using DataAccess.Implementation;
 using DataAccess.Interfaces;
+using DomainModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services.Implementation;
@@ -20,7 +21,7 @@ namespace VideoRentalOnlineStore
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MovieRentalAppDbContext>();
             builder.Services.AddControllersWithViews();

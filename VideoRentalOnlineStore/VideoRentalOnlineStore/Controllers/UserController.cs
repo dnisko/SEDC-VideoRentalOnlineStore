@@ -44,7 +44,7 @@ namespace VideoRentalOnlineStore.Controllers
             {
                 return View(model);
             }
-            _userService.Save(model);
+            _userService.SaveAsync(model);
 
 
             return RedirectToAction("Index");

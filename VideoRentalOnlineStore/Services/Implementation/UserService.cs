@@ -28,7 +28,7 @@ namespace Services.Implementation
             return user.ToModel();
         }
 
-        public void Save(UserViewModel userModel)
+        public async Task SaveAsync(UserViewModel userModel)
         {
             //if it is updating user
             if (_userRepository.GetAll().Any(x => x.UserName.ToLower() == userModel.UserName.ToLower() && x.Id != userModel.Id))
@@ -42,21 +42,50 @@ namespace Services.Implementation
             //    throw new Exception("Username is taken.");
             //}
 
-            var user = new User()
-            {
-                Id = userModel.Id,
-                FullName = userModel.FullName,
-                Age = userModel.Age,
-                UserName = userModel.UserName,
-                Password = userModel.Password,
-                CardNumber = userModel.CardNumber,
-                Email = userModel.Email,
-                CreatedOn = userModel.CreatedOn,
-                IsSubscriptionExpired = userModel.IsSubscriptionExpired,
-                SubscriptionType = userModel.SubscriptionType
-            };
+            User user;
 
-            _userRepository.Save(user);
+            // Check if the user already exists
+            if (userModel.Id > 0)
+            {
+                // Fetch the existing user
+                user = _userRepository.GetAll().FirstOrDefault(x => x.Id == userModel.Id);
+                if (user == null)
+                {
+                    throw new Exception("User not found.");
+                }
+
+                // Update existing user properties
+                user.FullName = userModel.FullName;
+                user.Age = userModel.Age;
+                user.UserName = userModel.UserName;
+                user.Password = userModel.Password;
+                user.Email = userModel.Email;
+                user.CreatedOn = userModel.CreatedOn;
+                user.IsSubscriptionExpired = userModel.IsSubscriptionExpired;
+                user.SubscriptionType = userModel.SubscriptionType;
+            }
+            else
+            {
+                // Create a new user
+                user = new User
+                {
+                    FullName = userModel.FullName,
+                    Age = userModel.Age,
+                    UserName = userModel.UserName,
+                    Password = userModel.Password,
+                    Email = userModel.Email,
+                    CreatedOn = userModel.CreatedOn,
+                    IsSubscriptionExpired = userModel.IsSubscriptionExpired,
+                    SubscriptionType = userModel.SubscriptionType
+                };
+
+                // Add the user to the repository
+                _userRepository.Save(user);
+
+                // Set the CardNumber after the user has been saved and ID has been assigned
+                user.CardNumber = user.Id.ToString().PadLeft(10, '0');
+                _userRepository.Save(user); // Ensure this updates the user with the new card number
+            }
         }
 
         //public void Create(UserViewModel user)
