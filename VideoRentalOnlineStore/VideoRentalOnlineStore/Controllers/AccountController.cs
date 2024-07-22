@@ -60,7 +60,7 @@ namespace VideoRentalOnlineStore.Controllers
                         SubscriptionType = user.SubscriptionType
                     };
 
-                    _userService.SaveAsync(appUser);
+                    await _userService.SaveAsync(appUser);
 
                     return RedirectToAction("Index", "Home");
                 }

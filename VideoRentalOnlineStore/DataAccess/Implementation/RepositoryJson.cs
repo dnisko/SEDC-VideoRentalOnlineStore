@@ -91,6 +91,11 @@ namespace DataAccess.Implementation
             WriteContent(items);
         }
 
+        public void Detach(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<T> ReadContent()
         {
             string folderPath = Environment.CurrentDirectory + @"\Data\";

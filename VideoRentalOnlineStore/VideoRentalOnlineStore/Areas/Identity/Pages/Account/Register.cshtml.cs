@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
@@ -126,16 +127,6 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    // Ensure the user is created before setting additional data
-                    var userId = 0;
-                    
-                    //var userId = Int32.Parse(await _userManager.GetUserIdAsync(user));
-                    //var cardNumber = userId.ToString().PadLeft(10, '0');
-
-                    //user.CardNumber = cardNumber; // Set the card number
-                    
-
-                    // Also add or update the custom User table if needed
                     var customUser = new User
                     {
                         //Id = userId,
@@ -151,26 +142,30 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
                     };
 
                     _userRepository.Save(customUser); // Ensure Save method handles both Add and Update
-                    var userAppId = _userRepository.GetAll().Where(x => x.Email == user.Email);
-                    var cardNumber = userAppId.Select(x => x.Id).ToString().PadLeft(10, '0');
-                    var updateUser = new User
+                    //_userRepository.Detach(customUser);
+
+                    var savedUser = _userRepository.GetAll().FirstOrDefault(x => x.Email == user.Email);
+                    
+                    if (savedUser != null)
                     {
-                        CardNumber = cardNumber
-                    };
+                        var cardNumber = savedUser.Id.ToString().PadLeft(10, '0');
+                        savedUser.CardNumber = cardNumber;
+                        //_userRepository.Detach(savedUser);
+                        _userRepository.Save(savedUser);
+                        user.SetCardNumber(cardNumber);
+                        var updateResult = await _userManager.UpdateAsync(user);
 
-                    _userRepository.Save(updateUser);
-                    user.CardNumber = cardNumber; // Set the card number
 
-                    var updateResult = await _userManager.UpdateAsync(user);
-
-                    if (!updateResult.Succeeded)
-                    {
-                        // Handle update failure
-                        foreach (var error in updateResult.Errors)
+                        if (!updateResult.Succeeded)
                         {
-                            ModelState.AddModelError(string.Empty, error.Description);
+                            // Handle update failure
+                            foreach (var error in updateResult.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+
+                            return Page();
                         }
-                        return Page();
                     }
 
                     _logger.LogInformation("User created a new account with password.");
@@ -180,7 +175,7 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
