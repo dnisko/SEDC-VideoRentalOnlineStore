@@ -16,16 +16,19 @@ namespace VideoRentalOnlineStore
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string 'DefaultConnectionString' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString") ??
+                                   throw new InvalidOperationException(
+                                       "Connection string 'DefaultConnectionString' not found.");
             builder.Services.AddDbContext<MovieRentalAppDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services
+                .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MovieRentalAppDbContext>();
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddTransient<IMovieRepository, MovieRepository>();
             builder.Services.AddTransient<IMovieService, MovieService>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -48,16 +51,48 @@ namespace VideoRentalOnlineStore
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication();;
+            app.UseAuthentication();
+            ;
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            
+
             app.MapRazorPages();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                CreateRolesAndAdminUser(roleManager, userManager).Wait();
+            }
+
             app.Run();
+        }
+
+        private static async Task CreateRolesAndAdminUser(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        {
+            if (!await roleManager.RoleExistsAsync("Admin"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            // Check if the admin user exists and create it if it doesn't
+            var adminUser = await userManager.FindByEmailAsync("admin@example.com");
+            if (adminUser == null)
+            {
+                adminUser = new ApplicationUser
+                {
+                    UserName = "admin@example.com",
+                    Email = "admin@example.com",
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(adminUser, "Admin@123");
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
         }
     }
 }

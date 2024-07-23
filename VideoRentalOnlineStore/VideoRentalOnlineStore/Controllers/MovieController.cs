@@ -40,5 +40,30 @@ namespace VideoRentalOnlineStore.Controllers
             var movies = _movieService.GetMovies();
             return View(movies);
         }
+
+        public IActionResult AddMovie()
+        {
+            var model = new MovieViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddMovie(MovieViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _movieService.Save(model); // Call Save method
+                    return RedirectToAction("Index"); // Redirect after successful save
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message); // Add model error if movie already exists
+                }
+            }
+            return View(model);
+        }
     }
 }

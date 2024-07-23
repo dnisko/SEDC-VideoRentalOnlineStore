@@ -1,0 +1,58 @@
+﻿@model MovieViewModel
+
+<form asp-action="AddMovie" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id"/>
+
+    <label asp-for="Title" class="form-label">Title</label>
+    <input asp-for="Title" class="form-control"/>
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br/>
+
+    <label asp-for="Language" class="form-label" Language></label>
+    <select asp-for="Language" class="form-control" asp-items="Html.GetEnumSelectList<Language>()"></select>
+    <span asp-validation-for="Language" class="text-danger"></span>
+    <br/>
+
+    <label asp-for="Genre" class="form-label">Genre</label>
+    <select asp-for="Genre" class="form-control" asp-items="Html.GetEnumSelectList<Genre>()"></select>
+    <span asp-validation-for="Genre" class="text-danger"></span>
+    <br/>
+
+    <label asp-for="AgeRestriction" class="form-label">AgeRestriction</label>
+    <input asp-for="AgeRestriction" class="form-control"/>
+    <span asp-validation-for="AgeRestriction" class="text-danger"></span>
+    <br/>
+
+    <label asp-for="ReleaseDate" class="form-label">ReleaseDate</label>
+    <input asp-for="ReleaseDate" class="form-control" type="text" placeholder="dd/MM/yyyy"/>
+    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+    <br/>
+
+    <label asp-for="Length" class="form-label">Length</label>
+    <input asp-for="Length" class="form-control" type="text" placeholder="hh:mm" />
+    <span asp-validation-for="Length" class="text-danger"></span>
+    <br/>
+
+    <label asp-for="Quantity" class="form-label">Quantity</label>
+    <input asp-for="Quantity" class="form-control"/>
+    <span asp-validation-for="Quantity" class="text-danger"></span>
+    <br/>
+
+    @* <input type="hidden" asp-for="CreatedOn" />
+
+    <input type="hidden" asp-for="IsSubscriptionExpired" />
+
+    <input type="hidden" asp-for="SubscriptionType" /> *@
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

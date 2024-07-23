@@ -44,11 +44,11 @@ namespace Services.Implementation
             {
                 //can we use the mapper here!?
                 //userModel.ToModel();
-                Id = movieModel.Id,
+                //Id = movieModel.Id,
                 Title = movieModel.Title,
                 Genre = movieModel.Genre,
                 Language = movieModel.Language,
-                IsAvailable = movieModel.IsAvailable,
+                IsAvailable = true,
                 ReleaseDate = movieModel.ReleaseDate,
                 Length = movieModel.Length,
                 AgeRestriction = movieModel.AgeRestriction,
