@@ -1,0 +1,38 @@
+﻿@model List<RentalViewModel>
+@{
+    ViewData["Title"] = "My Current Rentals";
+}
+<h1>My Current Rentals</h1>
+
+@if (!Model.Any())
+{
+    <p>You have no current rentals.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Movie Title</th>
+            <th>Rented On</th>
+            <th>Due Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@rental.Movie.Title</td>
+                <td>@rental.RentedOn.ToString("dd/MM/yyyy")</td>
+                <td>@rental.DueDate.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <form asp-action="ReturnMovie" asp-route-rentalId="@rental.Id" method="post">
+                        <button type="submit" class="btn btn-danger">Return</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

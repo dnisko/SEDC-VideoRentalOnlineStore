@@ -4,16 +4,18 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccess.Migrations
+namespace DataAccess.DataAccess.Migrations
 {
     [DbContext(typeof(MovieRentalAppDbContext))]
-    partial class MovieRentalAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240725010617_addedProperyInRental")]
+    partial class addedProperyInRental
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

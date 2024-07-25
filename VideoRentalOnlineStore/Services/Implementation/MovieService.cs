@@ -10,7 +10,7 @@ namespace Services.Implementation
 {
     public class MovieService : IMovieService
     {
-        private IMovieRepository _movieRepository;
+        private readonly IMovieRepository _movieRepository;
 
         public MovieService(IMovieRepository movieRepository)
         {

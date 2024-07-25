@@ -9,6 +9,9 @@ namespace Services.Interfaces
         //void SaveAsync(RentalViewModel rent);
         //void Delete(int id);
         public void RentMovie(int userId, int movieId);
-        public void ReturnMovie(int userId, int rentalId);
+        public void ReturnMovie(int rentalId);
+        public List<RentalViewModel> GetCurrentRentedMoviesByUser(int userId);
+        public List<RentalViewModel> GetUserHistoryRent(int userId);
+        public List<RentalViewModel> GetAllRentals();
     }
 }

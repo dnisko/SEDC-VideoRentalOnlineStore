@@ -8,5 +8,6 @@ namespace DataAccess.Interfaces
         List<User> SearchByUserName(string userName);
         User GetCardNumber(string cardNumber);
         User GetEmail(string email);
+
     }
 }

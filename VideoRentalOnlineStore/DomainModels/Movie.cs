@@ -13,5 +13,6 @@ namespace DomainModels
         public TimeSpan Length { get; set; }
         public int AgeRestriction { get; set; }
         public int Quantity { get; set; }
+        public virtual ICollection<Rental> Rentals { get; set; }
     }
 }

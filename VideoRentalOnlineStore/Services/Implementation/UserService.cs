@@ -10,11 +10,13 @@ namespace Services.Implementation
 {
     public class UserService : IUserService
     {
-        private IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IRentalRepository _rentalRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IRentalRepository rentalRepository)
         {
             _userRepository = userRepository;
+            _rentalRepository = rentalRepository;
         }
         public List<UserViewModel> GetAll()
         {
@@ -151,6 +153,28 @@ namespace Services.Implementation
             };
 
             _userRepository.Save(user);
+        }
+
+        public List<RentalViewModel> GetCurrentRentals(int userId)
+        {
+            var items = _rentalRepository.GetCurrentRentedMoviesByUser(userId);
+            return items.Select(x => x.ToModel()).ToList();
+        }
+
+        public List<RentalViewModel> GetRentalHistory(int userId)
+        {
+            var items = _rentalRepository.GetUserHistoryRent(userId);
+            return items.Select(x => x.ToModel()).ToList();
+        }
+
+        public void ReturnMovie(int rentalId)
+        {
+            var rental = _rentalRepository.GetById(rentalId);
+            if (rental != null)
+            {
+                rental.ReturnedOn = DateTime.Now;
+                _rentalRepository.Save(rental);
+            }
         }
     }
 }

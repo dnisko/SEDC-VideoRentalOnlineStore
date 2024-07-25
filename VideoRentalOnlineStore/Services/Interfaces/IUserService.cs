@@ -16,5 +16,8 @@ namespace Services.Interfaces
         UserViewModel GetCardNumber(string cardNumber);
         UserViewModel GetEmail(string email);
         void RegisterUser(UserViewModel newUser);
+        List<RentalViewModel> GetCurrentRentals(int userId);
+        List<RentalViewModel> GetRentalHistory(int userId);
+        void ReturnMovie(int rentalId);
     }
 }

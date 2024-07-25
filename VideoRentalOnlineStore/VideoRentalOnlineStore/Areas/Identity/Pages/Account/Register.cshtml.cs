@@ -129,11 +129,10 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
                 {
                     var customUser = new User
                     {
-                        //Id = userId,
                         FullName = user.FullName,
                         Age = user.Age,
                         UserName = user.UserName,
-                        Password = user.PasswordHash, // Note: PasswordHash may not be directly accessible
+                        Password = user.PasswordHash,
                         //CardNumber = cardNumber,
                         Email = user.Email,
                         CreatedOn = DateTime.UtcNow,
@@ -141,8 +140,7 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
                         SubscriptionType = user.SubscriptionType
                     };
 
-                    _userRepository.Save(customUser); // Ensure Save method handles both Add and Update
-                    //_userRepository.Detach(customUser);
+                    _userRepository.Save(customUser);
 
                     var savedUser = _userRepository.GetAll().FirstOrDefault(x => x.Email == user.Email);
                     
@@ -150,7 +148,6 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
                     {
                         var cardNumber = savedUser.Id.ToString().PadLeft(10, '0');
                         savedUser.CardNumber = cardNumber;
-                        //_userRepository.Detach(savedUser);
                         _userRepository.Save(savedUser);
                         user.SetCardNumber(cardNumber);
                         var updateResult = await _userManager.UpdateAsync(user);
@@ -158,7 +155,6 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
 
                         if (!updateResult.Succeeded)
                         {
-                            // Handle update failure
                             foreach (var error in updateResult.Errors)
                             {
                                 ModelState.AddModelError(string.Empty, error.Description);
@@ -197,7 +193,6 @@ namespace VideoRentalOnlineStore.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

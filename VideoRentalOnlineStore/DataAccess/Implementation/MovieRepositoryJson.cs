@@ -24,5 +24,15 @@ namespace DataAccess.Implementation
             var availableMovies = ReadContent();
             return availableMovies.Where(x => x.IsAvailable).ToList();
         }
+
+        public void DecreaseQuantity(int movieId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IncreaseQuantity(int movieId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

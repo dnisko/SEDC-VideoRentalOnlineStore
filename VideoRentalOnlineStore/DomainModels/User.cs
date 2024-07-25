@@ -13,5 +13,6 @@ namespace DomainModels
         public DateTime CreatedOn { get; set; }
         public bool IsSubscriptionExpired { get; set; }
         public SubscriptionType SubscriptionType { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
     }
 }

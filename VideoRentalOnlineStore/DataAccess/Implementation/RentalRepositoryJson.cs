@@ -16,5 +16,20 @@ namespace DataAccess.Implementation
             var activeRentals = ReadContent();
             return activeRentals.FirstOrDefault(x => x.UserId == userId && x.MovieId == movieId);
         }
+
+        public List<Rental> GetCurrentRentedMoviesByUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Rental> GetUserHistoryRent(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Rental> GetAllRentals()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

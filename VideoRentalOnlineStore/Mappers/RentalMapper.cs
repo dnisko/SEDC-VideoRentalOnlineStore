@@ -12,8 +12,10 @@ namespace Mappers
                 Id = rental.Id,
                 MovieId = rental.MovieId,
                 UserId = rental.UserId,
-                RentedOn = rental.RentedOn//,
-                //ReturnedOn = rental.ReturnedOn
+                RentedOn = rental.RentedOn,
+                ReturnedOn = rental.ReturnedOn,
+                DueDate = rental.DueDate,
+                Movie = rental.Movie
             };
 
             return model;

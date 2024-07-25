@@ -11,8 +11,9 @@
         <th scope="col">Title</th>
         <th scope="col">Genre</th>
         <th scope="col">Language</th>
-        <th scope="col">ReleaseDate</th>
-        <th scope="col">IsAvailable</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Available</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -23,10 +24,16 @@
             <td>@movie.Title</td>
             <td>@movie.Genre</td>
             <td>@movie.Language</td>
-            <td>@movie.ReleaseDate</td>
+            <td>@movie.ReleaseDate.ToString("dd/MM/yyyy")</td>
             <td>@(movie.IsAvailable ? "Yes" : "No")</td>
             <td>
                 <a asp-action="Details" asp-controller="Movie" asp-route-id="@movie.Id" class="btn btn-primary">Details</a>
+                @if (movie.IsAvailable)
+                {
+                    <form asp-action="RentMovie" asp-controller="Movie" asp-route-movieId="@movie.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-success">Rent</button>
+                    </form>
+                }
             </td>
         </tr>
     }

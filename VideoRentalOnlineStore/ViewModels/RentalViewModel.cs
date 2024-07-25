@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DomainModels;
 
 namespace ViewModels
 {
@@ -14,6 +15,9 @@ namespace ViewModels
         public DateTime RentedOn { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime ReturnedOn { get; set; }
+        public DateTime? ReturnedOn { get; set; }
+        public DateTime DueDate { get; set; }
+        public Movie Movie { get; set; }
+        public User User { get; set; }
     }
 }

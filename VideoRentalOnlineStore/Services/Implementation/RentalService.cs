@@ -9,10 +9,10 @@ namespace Services.Implementation
 {
     public class RentalService : IRentalService
     {
-        private IMovieRepository _movieRepository;
-        private IUserRepository _userRepository;
-        private IRentalRepository _rentalRepository;
-
+        private readonly IMovieRepository _movieRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IRentalRepository _rentalRepository;
+        
         public RentalService(IMovieRepository movieRepository, IUserRepository userRepository, IRentalRepository rentalRepository)
         {
             _movieRepository = movieRepository;
@@ -35,47 +35,44 @@ namespace Services.Implementation
         public void RentMovie(int userId, int movieId)
         {
             var movie = _movieRepository.GetById(movieId);
-
-            if (movie == null || movie.Quantity < 0)
+            if (movie != null && movie.Quantity > 0)
             {
-                throw new Exception("The movie is not available for rent.");
+                var rental = new Rental
+                {
+                    MovieId = movieId,
+                    UserId = userId,
+                    RentedOn = DateTime.Now
+                };
+                _rentalRepository.Save(rental);
+                _movieRepository.DecreaseQuantity(movieId);
             }
-
-            var isAvailableForRent = _rentalRepository.GetActiveRental(userId, movieId);
-            if (isAvailableForRent != null)
-            {
-                throw new Exception("The movie is already rented by you. Please return it.");
-            }
-
-            //var renting = isAvailableForRent.FirstOrDefault(x => x.ToModel());
-            var rent = new Rental
-            {
-                UserId = userId,
-                MovieId = movieId,
-                RentedOn = DateTime.UtcNow
-            };
-
-            _rentalRepository.Save(rent);
-
-            movie.Quantity--;
-            _movieRepository.Save(movie);
         }
 
-        public void ReturnMovie(int userId, int rentalId)
+        public void ReturnMovie(int rentalId)
         {
             var rental = _rentalRepository.GetById(rentalId);
-
-            if (rental == null || rental.UserId != userId || rental.ReturnedOn != null)
+            if (rental != null)
             {
-                throw new Exception("Invalid rental or movie is already rented.");
+                rental.ReturnedOn = DateTime.Now;
+                _rentalRepository.Save(rental);
+                _movieRepository.IncreaseQuantity(rental.MovieId);
             }
+        }
 
-            rental.ReturnedOn = DateTime.UtcNow;
-            _rentalRepository.Save(rental);
+        public List<RentalViewModel> GetCurrentRentedMoviesByUser(int userId)
+        {
+            var items = _rentalRepository.GetCurrentRentedMoviesByUser(userId);
+            return items.Select(x => x.ToModel()).ToList();
+        }
 
-            var movie = _movieRepository.GetById(rental.MovieId);
-            movie.Quantity++;
-            _movieRepository.Save(movie);
+        public List<RentalViewModel> GetUserHistoryRent(int userId)
+        {
+            return _rentalRepository.GetUserHistoryRent(userId).Select(x => x.ToModel()).ToList();
+        }
+
+        public List<RentalViewModel> GetAllRentals()
+        {
+            return _rentalRepository.GetAllRentals().Select(x => x.ToModel()).ToList();
         }
     }
 }

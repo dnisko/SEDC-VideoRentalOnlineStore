@@ -35,5 +35,25 @@ namespace DataAccess.Implementation
                 .ToList();
             return items;
         }
+
+        public void DecreaseQuantity(int movieId)
+        {
+            var movie = _dbContext.Movies.Find(movieId);
+            if (movie != null && movie.Quantity > 0)
+            {
+                movie.Quantity--;
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void IncreaseQuantity(int movieId)
+        {
+            var movie = _dbContext.Movies.Find(movieId);
+            if (movie != null)
+            {
+                movie.Quantity++;
+                _dbContext.SaveChanges();
+            }
+        }
     }
 }
